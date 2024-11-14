@@ -1,0 +1,7 @@
+matplotlib
+numpy
+tqdm
+openai
+torch
+transformers
+python-dotenv
