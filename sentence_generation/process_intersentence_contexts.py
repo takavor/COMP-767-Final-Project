@@ -10,10 +10,14 @@ with open("data/original_intersentence_contexts.json", "r") as file:
 
 processed_contexts = []
 
+intersentence_contexts_original = []
+intersentence_contexts_1 = []
+intersentence_contexts_2 = []
+
 for context in data:
     
-    
     response = context["response"]
+    
     # extract two sentences
     sentences = response.split("\n")
     if (len(sentences) != 2):
@@ -22,9 +26,6 @@ for context in data:
     
     # remove whitespaces
     sentences = [s.strip() for s in sentences]
-    
-    # add to context
-    context["generated_contexts"] = sentences
     
     # remove unnecessary keys
     context.pop("response", None)
@@ -41,9 +42,25 @@ for context in data:
         })
     
     context["replies"] = replies
-    processed_contexts.append(context)
     
-# write to file
-with open("data/processed_intersentence_contexts.json", "w") as file:
-    json.dump(processed_contexts, file, indent=4)
+    # add contexts
+    context_1 = context.copy()
+    context_2 = context.copy()
+    
+    context_1['context'] = sentences[0]
+    context_2['context'] = sentences[1]
+    
+    intersentence_contexts_original.append(context)
+    intersentence_contexts_1.append(context_1)
+    intersentence_contexts_2.append(context_2)
+    
+# write to files
+with open("data/intersentence_contexts_original.json", "w") as file:
+    json.dump(intersentence_contexts_original, file, indent=4)
+    
+with open("data/intersentence_contexts_1.json", "w") as file:
+    json.dump(intersentence_contexts_1, file, indent=4)
+    
+with open("data/intersentence_contexts_2.json", "w") as file:
+    json.dump(intersentence_contexts_2, file, indent=4)
     
