@@ -11,7 +11,7 @@ with open('data/llama_preliminary_2.json') as file_2:
     data_2 = json.load(file_2)
 
 
-from metrics import get_metrics
+from utils.metrics import get_metrics
 lms_1, ss_1, icat_1 = get_metrics(data_1)
 lms_2, ss_2, icat_2 = get_metrics(data_2)
 
