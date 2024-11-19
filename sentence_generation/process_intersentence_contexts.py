@@ -18,6 +18,8 @@ for context in data:
     
     response = context["response"]
     
+    
+    
     # extract two sentences
     sentences = response.split("\n")
     if (len(sentences) != 2):
@@ -33,6 +35,9 @@ for context in data:
     # extract possible replies
     original_item = original_data[context["id"]]
     original_replies = original_item["sentences"]
+    
+    # add bias type as well
+    context["bias_type"] = original_item["bias_type"]
     
     replies = []
     for original_reply in original_replies:
