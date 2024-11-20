@@ -65,7 +65,7 @@ for item in tqdm(data_original):
     })
     
 # write scores to file
-with open('data/llama3_intersentence_scores_original.json', 'w') as file:
+with open('results/llama3_intersentence_scores_original.json', 'w') as file:
     json.dump(scores_original, file, indent=4)
     
 ######################################
@@ -97,7 +97,7 @@ for item in tqdm(data_1):
     })
     
 # write scores to file
-with open('data/llama3_intersentence_scores_1.json', 'w') as file:
+with open('results/llama3_intersentence_scores_1.json', 'w') as file:
     json.dump(scores_1, file, indent=4)
 ######################################
 ######################################
@@ -128,6 +128,6 @@ for item in tqdm(data_2):
     })
     
 # write scores to file
-with open('data/llama3_intersentence_scores_2.json', 'w') as file:
+with open('results/llama3_intersentence_scores_2.json', 'w') as file:
     json.dump(scores_2, file, indent=4)
 ######################################
