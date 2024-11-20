@@ -1,0 +1,74 @@
+[
+    {
+        "file_name": "results/gpt3-5_intersentence_predictions_original.json",
+        "lms": 95.93094944512947,
+        "ss": 59.25449871465296,
+        "icat": 78.17509247842169
+    },
+    {
+        "file_name": "results/gpt3-5_intersentence_predictions_1.json",
+        "lms": 96.17755856966707,
+        "ss": 56.41025641025641,
+        "icat": 83.84710234278667
+    },
+    {
+        "file_name": "results/gpt3-5_intersentence_predictions_2.json",
+        "lms": 95.68434032059187,
+        "ss": 59.27835051546392,
+        "icat": 77.92848335388409
+    },
+    {
+        "file_name": "results/gpt3-5_intrasentence_predictions_original.json",
+        "lms": 98.13895781637717,
+        "ss": 72.18710493046775,
+        "icat": 54.590570719602994
+    },
+    {
+        "file_name": "results/gpt3-5_intrasentence_predictions_1.json",
+        "lms": 99.10600255427842,
+        "ss": 72.80927835051546,
+        "icat": 53.89527458492977
+    },
+    {
+        "file_name": "results/gpt3-5_intrasentence_predictions_2.json",
+        "lms": 98.08917197452229,
+        "ss": 73.37662337662337,
+        "icat": 52.229299363057336
+    },
+    {
+        "file_name": "results/llama3_intersentence_scores_original.json",
+        "lms": 88.77928483353884,
+        "ss": 58.47222222222223,
+        "icat": 73.73612823674475
+    },
+    {
+        "file_name": "results/llama3_intersentence_scores_1.json",
+        "lms": 88.53267570900123,
+        "ss": 56.824512534818936,
+        "icat": 76.44882860665845
+    },
+    {
+        "file_name": "results/llama3_intersentence_scores_2.json",
+        "lms": 87.91615289765721,
+        "ss": 56.381486676016834,
+        "icat": 76.69543773119604
+    },
+    {
+        "file_name": "results/llama3_intrasentence_scores_original.json",
+        "lms": 97.89081885856079,
+        "ss": 66.53992395437263,
+        "icat": 65.50868486352357
+    },
+    {
+        "file_name": "results/llama3_intrasentence_scores_1.json",
+        "lms": 95.527950310559,
+        "ss": 65.7997399219766,
+        "icat": 65.34161490683229
+    },
+    {
+        "file_name": "results/llama3_intrasentence_scores_2.json",
+        "lms": 94.90683229813665,
+        "ss": 67.40837696335078,
+        "icat": 61.8633540372671
+    }
+]

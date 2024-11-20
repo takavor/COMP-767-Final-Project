@@ -36,7 +36,7 @@ for file_name in tqdm(file_names):
        
         bias_type = item['bias_type']
         
-        if bias_type != "gender":
+        if bias_type != "profession":
             continue
         
         if label is None or bias_type is None:
@@ -68,6 +68,6 @@ for file_name in tqdm(file_names):
     })
     
     
-with open("results/scores_gender.json", "w") as file:
+with open("results/scores_profession.json", "w") as file:
     json.dump(scores, file, indent=4)
         
