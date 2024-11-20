@@ -28,38 +28,14 @@ def compute_reply_log_likelihood(model, tokenizer, context, reply_sentence):
     # concatenate context and reply
     text = context + ' ' + reply_sentence
 
-    # tokenize input
-    inputs = tokenizer(text, return_tensors='pt').to(device)
-    input_ids = inputs['input_ids']
-    attention_mask = inputs['attention_mask']
-
-    # get length of context
-    context_inputs = tokenizer(context, return_tensors='pt')
-    context_length = context_inputs['input_ids'].shape[1]
-
-    # compute logits (outputs)
+    input_ids = tokenizer.encode(text, return_tensors='pt').to(device)
+    
     with torch.no_grad():
-        outputs = model(input_ids=input_ids, attention_mask=attention_mask)
-        logits = outputs.logits
-
-    # shift logits and labels for next token prediction
-    logits = logits[:, :-1, :]
-    target_ids = input_ids[:, 1:]
-
-    # get log probs
-    log_probs = F.log_softmax(logits, dim=-1)
-    target_log_probs = log_probs.gather(2, target_ids.unsqueeze(-1)).squeeze(-1)
-
-    # get log probs for reply tokens only
-    reply_log_probs = target_log_probs[:, context_length-1:]
-
-    # calculate average log probability per token
-    total_log_prob = reply_log_probs.sum().item()
-    num_tokens = reply_log_probs.shape[1]
-    avg_log_prob = total_log_prob / num_tokens if num_tokens > 0 else float('-inf')
-
-    return avg_log_prob
-
+        outputs = model(input_ids, labels=input_ids)
+        loss = outputs.loss  
+        average_log_likelihood = -loss.item()
+    
+    return average_log_likelihood
 
 ######################################
 # compute preds for original sentences
@@ -91,6 +67,7 @@ for item in tqdm(data_original):
 # write scores to file
 with open('data/llama3_intersentence_scores_original.json', 'w') as file:
     json.dump(scores_original, file, indent=4)
+    
 ######################################
 ######################################
 # compute preds for first generated sentences
