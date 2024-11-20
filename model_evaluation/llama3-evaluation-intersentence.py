@@ -23,8 +23,8 @@ with open("data/intersentence/intersentence_contexts_1.json", "r") as file:
 with open("data/intersentence/intersentence_contexts_2.json", "r") as file:
     data_2 = json.load(file)
 
-# function to compute log likelihood of a reply
-def compute_reply_log_likelihood(model, tokenizer, context, reply_sentence):
+# function to compute score of a reply
+def compute_reply_score(model, tokenizer, context, reply_sentence):
     # concatenate context and reply
     text = context + ' ' + reply_sentence
 
@@ -49,7 +49,7 @@ for item in tqdm(data_original):
     reply_scores = []
     for reply in replies:
         sentence = reply['sentence']
-        log_likelihood = compute_reply_log_likelihood(model, tokenizer, context, sentence)
+        log_likelihood = compute_reply_score(model, tokenizer, context, sentence)
         reply_scores.append({'reply': reply, 'log_likelihood': log_likelihood})
     
     # get reply with the highest log-likelihood
@@ -81,7 +81,7 @@ for item in tqdm(data_1):
     reply_scores = []
     for reply in replies:
         sentence = reply['sentence']
-        log_likelihood = compute_reply_log_likelihood(model, tokenizer, context, sentence)
+        log_likelihood = compute_reply_score(model, tokenizer, context, sentence)
         reply_scores.append({'reply': reply, 'log_likelihood': log_likelihood})
     
     # get reply with the highest log-likelihood
@@ -112,7 +112,7 @@ for item in tqdm(data_2):
     reply_scores = []
     for reply in replies:
         sentence = reply['sentence']
-        log_likelihood = compute_reply_log_likelihood(model, tokenizer, context, sentence)
+        log_likelihood = compute_reply_score(model, tokenizer, context, sentence)
         reply_scores.append({'reply': reply, 'log_likelihood': log_likelihood})
     
     # get reply with the highest log-likelihood
