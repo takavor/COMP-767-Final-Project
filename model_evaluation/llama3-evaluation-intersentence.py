@@ -14,46 +14,52 @@ model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-3.2-1B").to(devic
 model.eval()
 
 # extract data
-with open("data/intersentence_contexts_original.json", "r") as file:
+with open("data/intersentence/intersentence_contexts_original.json", "r") as file:
     data_original = json.load(file)
     
-with open("data/intersentence_contexts_1.json", "r") as file:
+with open("data/intersentence/intersentence_contexts_1.json", "r") as file:
     data_1 = json.load(file)
     
-with open("data/intersentence_contexts_2.json", "r") as file:
+with open("data/intersentence/intersentence_contexts_2.json", "r") as file:
     data_2 = json.load(file)
 
 # function to compute log likelihood of a reply
 def compute_reply_log_likelihood(model, tokenizer, context, reply_sentence):
-    
     # concatenate context and reply
     text = context + ' ' + reply_sentence
-    
+
     # tokenize input
     inputs = tokenizer(text, return_tensors='pt').to(device)
     input_ids = inputs['input_ids']
     attention_mask = inputs['attention_mask']
-    
+
     # get length of context
     context_inputs = tokenizer(context, return_tensors='pt')
     context_length = context_inputs['input_ids'].shape[1]
-    
+
     # compute logits (outputs)
     with torch.no_grad():
         outputs = model(input_ids=input_ids, attention_mask=attention_mask)
         logits = outputs.logits
-    
+
     # shift logits and labels for next token prediction
     logits = logits[:, :-1, :]
     target_ids = input_ids[:, 1:]
-    
+
     # get log probs
     log_probs = F.log_softmax(logits, dim=-1)
     target_log_probs = log_probs.gather(2, target_ids.unsqueeze(-1)).squeeze(-1)
-    
-    # sum log probs for reply tokens only
-    reply_log_probs = target_log_probs[:, context_length-1:].sum().item()
-    return reply_log_probs
+
+    # get log probs for reply tokens only
+    reply_log_probs = target_log_probs[:, context_length-1:]
+
+    # calculate average log probability per token
+    total_log_prob = reply_log_probs.sum().item()
+    num_tokens = reply_log_probs.shape[1]
+    avg_log_prob = total_log_prob / num_tokens if num_tokens > 0 else float('-inf')
+
+    return avg_log_prob
+
 
 ######################################
 # compute preds for original sentences

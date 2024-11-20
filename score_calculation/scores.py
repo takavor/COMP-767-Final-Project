@@ -33,8 +33,10 @@ for file_name in tqdm(file_names):
     for item in data:
         
         label = item['gold_label']
+       
+        bias_type = item['bias_type']
         
-        if label is None:
+        if label is None or bias_type is None:
             continue
         
         # lms

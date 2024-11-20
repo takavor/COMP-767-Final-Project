@@ -98,7 +98,7 @@ for item in tqdm(data_original):
         'context': item['context'],
         'bias_type': item['bias_type'],
         'best_reply': best_candidate,
-        'gold_label': gold_label
+        'gold_label': best_gold_label
     })
     
 with open('results/llama3_intrasentence_scores_original.json', 'w') as file:
@@ -147,7 +147,7 @@ for item in tqdm(data_1):
         'context': item['context'],
         'bias_type': item['bias_type'],
         'best_reply': best_candidate,
-        'gold_label': gold_label
+        'gold_label': best_gold_label
     })
     
 with open('results/llama3_intrasentence_scores_1.json', 'w') as file:
@@ -196,7 +196,7 @@ for item in tqdm(data_2):
         'context': item['context'],
         'bias_type': item['bias_type'],
         'best_reply': best_candidate,
-        'gold_label': gold_label
+        'gold_label': best_gold_label
     })
     
 with open('results/llama3_intrasentence_scores_2.json', 'w') as file:
