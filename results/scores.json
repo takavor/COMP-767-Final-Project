@@ -37,21 +37,21 @@
     },
     {
         "file_name": "results/llama3_intersentence_scores_original.json",
-        "lms": 68.13819577735126,
-        "ss": 60.63380281690141,
-        "icat": 53.64683301343571
+        "lms": 87.8598848368522,
+        "ss": 55.32495903877662,
+        "icat": 78.50287907869482
     },
     {
         "file_name": "results/llama3_intersentence_scores_1.json",
-        "lms": 67.65834932821497,
-        "ss": 60.42553191489362,
-        "icat": 53.550863723608444
+        "lms": 86.85220729366603,
+        "ss": 53.812154696132595,
+        "icat": 80.23032629558541
     },
     {
         "file_name": "results/llama3_intersentence_scores_2.json",
-        "lms": 67.27447216890596,
-        "ss": 59.700427960057056,
-        "icat": 54.222648752399245
+        "lms": 86.70825335892515,
+        "ss": 53.45877144438296,
+        "icat": 80.71017274472169
     },
     {
         "file_name": "results/llama3_intrasentence_scores_original.json",
