@@ -5,8 +5,8 @@ from tqdm import tqdm
 from openai import OpenAI
 
 # Load environment variables
-load_dotenv()
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+# load_dotenv()
+# os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 # Initialize the OpenAI client
 client = OpenAI()
@@ -70,7 +70,7 @@ def process_json_file(input_file, output_file):
 def main():
     # Input and output file names
     files = [
-        {"input": "data/intersentence/intersentence_contexts_1.json", "output": "results/gpt3-5_intersentence_predictions_1.json"},
+       # {"input": "data/intersentence/intersentence_contexts_1.json", "output": "results/gpt3-5_intersentence_predictions_1.json"},
         {"input": "data/intersentence/intersentence_contexts_2.json", "output": "results/gpt3-5_intersentence_predictions_2.json"},
         {"input": "data/intersentence/intersentence_contexts_original.json", "output": "results/gpt3-5_intersentence_predictions_original.json"},
     ]
