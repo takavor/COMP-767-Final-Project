@@ -5,7 +5,7 @@ import json
 from tqdm import tqdm
 
 from huggingface_hub import login
-login(token="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")
+login(token="")
 
 device = torch.device("cuda" if torch.cuda.is_available() else 'cpu')
 

@@ -6,7 +6,7 @@ import json
 from tqdm import tqdm
 
 # load llama 3 model
-login(token="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")
+login(token="")
 
 device = torch.device("cuda" if torch.cuda.is_available() else 'cpu')
 
