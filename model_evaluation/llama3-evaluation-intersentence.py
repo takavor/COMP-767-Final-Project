@@ -3,9 +3,16 @@ import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import json
 from tqdm import tqdm
+from dotenv import load_dotenv
+import os
 
 from huggingface_hub import login
-login(token="")
+
+# load llama 3 model
+load_dotenv()
+HF_TOKEN = os.getenv("HUGGINFACE_TOKEN")
+
+login(token=HF_TOKEN)
 
 device = torch.device("cuda" if torch.cuda.is_available() else 'cpu')
 

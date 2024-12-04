@@ -1,62 +1,52 @@
 # Stereotypical Bias in Pretrained Language Models
 
-This project extends the work introduced in the paper "StereoSet: Measuring stereotypical bias in pretrained language models" by evaluating the robustness of pretrained Large Language Models (LLMs) to stereotypical bias. Using the original StereoSet as a foundation, we generate a new dataset with GPT-4 to test against both the original and new sets. We compare the performance of the GPT-2 model with the newer LLaMA-2 7B model to assess advancements in reducing stereotypical biases.
+This project is an experiment on testing the robustness of modern LLMs (GPT-3.5 and Llama 3.2) towards stereotypical biases. We do this by extending StereoSet, an existing dataset created to this effect, by generating copies of its sentences using GPT-4o that differ in wording but are similar in semantics, and evaluate how model changes behaviour. Models choose which reply is most likely.
 
 ## Installation
 
-Before running the evaluations, ensure that you have all necessary dependencies installed:
+Copy the `.env.example` file:
+
+```bash
+cp .env.example .env
+```
+
+Install the requirements:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Data Generation
+## Running the Evaluations
 
-### Generating New Sentences
+### GPT-3.5
 
-To create a dataset with semantically similar meanings but different formulations, use the following command:
+1. Insert your OpenAI API key in your `.env`.
 
-```bash
-python promptgeneration.py
-```
-
-### Processing the Data
-
-After generating the new sentences, format the dataset to align with the StereoSet structure:
+2. Run the scripts:
 
 ```bash
-python promptprocessing.py
+python model_evaluation/gpt3.5-turbo-inter-predictions.py
+python model_evaluation/gpt3.5-turbo-intra-predictions.py
 ```
 
-## Evaluation
+### Llama 3.2
 
-To evaluate the models' stereotypical bias, follow these steps:
+1. Insert your HuggingFace token for Llama 3.2 1B in your `.env`. You can request a token [here](https://huggingface.co/meta-llama/Llama-3.2-1B).
 
-### Model Prediction
-
-First, obtain the model's predicted words using LLaMA-2:
+2. Run the scripts:
 
 ```bash
-python llama2-likelihood.py
+python model_evaluation/llama3-evaluation-intersentence.py
+python model_evaluation/llama3-evaluation-intrasentence.py
 ```
 
-### Calculating ICAT Scores
-
-Evaluate the stereotypical bias of both GPT-2 and LLaMA-2 models by running:
-
-
-```bash
-python llama2-evaluation.py
-python gpt2-evaluation.py
-```
-
-This will generate ICAT scores and save graphs comparing the models in the `results/` directory.
+The results will be stored in the `results` folder.
 
 ## Results
 
-The graph below shows a visual comparison of ICAT scores between the GPT-2 and LLaMA-2 models across both datasets.
+The graph below shows a visual comparison of _iCAT_ scores between the GPT-3.5 and Llama 3.2 models across all datasets and tasks.
 
-![ICAT Scores Comparison](results/icat_scores.png)
+![ICAT Scores Comparison](results/icat_scores_by_task_and_dataset.png)
 
 ## Contributing
 
@@ -65,7 +55,3 @@ Contributions are welcome! If you have suggestions for improving the code, addin
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
-## Notes about Release
-We are not releasing a PyPi package because our generated datasets are available under `data\data_gpt4_2.json` and `data\data_gpt4_1.json`. Furthermore, [installation instructions](#installation) are also available above.
